@@ -6,6 +6,6 @@ Gem::Specification.new do |s|
   s.description = "A instagram scraper to get user instagram data thought public api (search and media)"
   s.authors     = ["samwalker"]
   s.email       = 'samwalker505@gmail.com'
-  s.files       = ["lib/instagram_scraper.rb, lib/instagram_user.rb"]
+  s.files       = ["lib/instagram_scraper.rb", "lib/instagram_user.rb"]
   s.homepage    = 'http://samwalker505.github.io/'
 end
