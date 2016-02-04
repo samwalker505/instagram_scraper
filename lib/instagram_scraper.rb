@@ -2,8 +2,7 @@ class InstagramScraper
   #code
   def self.get_user_basic_json(name)
     info_json = load_json("https://www.instagram.com/web/search/topsearch/?query=#{name}")
-    first_user = info_json['users'][0] unless info_json['users'].nil? || info_json['users'].empty?
-    user = first_user['user'] unless first_user.nil? || first_user['username'] == name
+    info_json['users'].find { |e| e['user']['username'] == name }['user']
   end
 
   def self.load_json(url)

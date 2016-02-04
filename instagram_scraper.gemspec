@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'instagram_scraper'
-  s.version     = '0.1.0'
+  s.version     = '0.1.1'
   s.licenses    = ['MIT']
   s.summary     = "A instagram scraper to get user instagram data"
   s.description = "A instagram scraper to get user instagram data thought public api (search and media)"
