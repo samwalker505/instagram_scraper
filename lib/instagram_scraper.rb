@@ -29,7 +29,7 @@ class InstagramScraper
     end
 
     def login_instagram(username, password)
-      browser = Watir::Browser.new
+      browser = Watir::Browser.new :phantomjs
       browser.goto "https://www.instagram.com/accounts/login/"
       browser.text_field(css: 'div._ccek6:nth-child(1) > input:nth-child(1)').when_present.set(username)
       browser.text_field(css: 'div._ccek6:nth-child(2) > input:nth-child(1)').when_present.set(password)
@@ -51,7 +51,8 @@ class InstagramScraper
     end
 end
 
+require 'watir-webdriver'
 require 'nokogiri'
-require "watir"
+# require "watir"
 require 'open-uri'
 require "json"
