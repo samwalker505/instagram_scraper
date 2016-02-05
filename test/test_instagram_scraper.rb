@@ -12,10 +12,21 @@ describe InstagramScraper do
     end
   end
 
+  describe "when load_media_json with name" do
+    it 'should media[items] should greater than 0' do
+        InstagramScraper.load_media_json('jas.jim')['items'].must_be :>, 0
+    end
+  end
+
   describe "when get name" do
     it "should be a instance of InstagramUser" do
       InstagramScraper.get('samwalker505').must_be_instance_of InstagramUser
     end
   end
 
+  describe "when login instagram" do
+    it "should login correctly" do
+      InstagramScraper.login_instagram('spreadit_seeds', 'spreadit2014').must_equal true
+    end
+  end
 end
