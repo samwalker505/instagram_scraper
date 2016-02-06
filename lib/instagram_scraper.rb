@@ -20,12 +20,7 @@ class InstagramScraper
 
   private
     def load_media_json(name)
-      url = "https://www.instagram.com/#{name}/media"
-      b = login_instagram @username, @password
-      b.goto url
-      html_doc = Nokogiri::HTML(b.html)
-      json = html_doc.css('pre').first.content
-      JSON.load(json)
+      load_json "https://www.instagram.com/#{name}/media"
     end
 
     def login_instagram(username, password)
@@ -39,20 +34,22 @@ class InstagramScraper
     end
 
     def get_user_basic_json(name)
-      info_json = load_json("https://www.instagram.com/web/search/topsearch/?query=#{name}")
+      info_json = load_json "https://www.instagram.com/web/search/topsearch/?query=#{name}"
       info_json['users'].find { |e| e['user']['username'] == name }['user']
     end
 
     def load_json(url)
       #code
       # JSON.load(open(url))
-      uri = URI.parse(url)
-      JSON.load(uri.open)
+      b = login_instagram @username, @password
+      b.goto url
+      html_doc = Nokogiri::HTML(b.html)
+      json_string = html_doc.css('pre').first.content
+      json = JSON.load(json_string)
     end
 end
 
 require 'watir-webdriver'
 require 'nokogiri'
-# require "watir"
 require 'open-uri'
 require "json"
