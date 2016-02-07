@@ -24,9 +24,8 @@ class InstagramScraper
     end
 
     def login_instagram(username, password)
-      client = Selenium::WebDriver::Remote::Http::Default.new
-      client.timeout = 180 # seconds – default is 60
-      browser = Watir::Browser.new :phantomjs, http_client: client
+      browser = Watir::Browser.new :phantomjs
+      browser.driver.manage.timeouts.implicit_wait = 180 #180 seconds
       browser.goto "https://www.instagram.com/accounts/login/"
       browser.text_field(css: 'div._ccek6:nth-child(1) > input:nth-child(1)').when_present.set(username)
       browser.text_field(css: 'div._ccek6:nth-child(2) > input:nth-child(1)').when_present.set(password)
