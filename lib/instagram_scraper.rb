@@ -46,6 +46,7 @@ class InstagramScraper
       b.goto url
       html_doc = Nokogiri::HTML(b.html)
       json_string = html_doc.css('pre').first.content
+      b.close
       json = JSON.load(json_string)
     end
 end
