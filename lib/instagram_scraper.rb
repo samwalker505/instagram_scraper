@@ -24,13 +24,13 @@ class InstagramScraper
     end
 
     def login_instagram(username, password)
+      Watir.default_timeout=(180)
       browser = Watir::Browser.new :phantomjs
-      browser.driver.manage.timeouts.implicit_wait = 180 #180 seconds
       browser.goto "https://www.instagram.com/accounts/login/"
       browser.text_field(css: 'div._ccek6:nth-child(1) > input:nth-child(1)').when_present.set(username)
       browser.text_field(css: 'div._ccek6:nth-child(2) > input:nth-child(1)').when_present.set(password)
       browser.button(css: '._rz1lq').click
-      browser.div(css: '._l09h7').wait_until_present
+      sleep(2)
       browser
     end
 
