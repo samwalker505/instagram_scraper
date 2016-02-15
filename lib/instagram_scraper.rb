@@ -25,13 +25,12 @@ class InstagramScraper
 
     def login_instagram(username, password)
       Watir.default_timeout=(180)
-      browser = Watir::Browser.new :phantomjs
-      browser.goto "https://www.instagram.com/accounts/login/"
-      browser.text_field(css: 'div._ccek6:nth-child(1) > input:nth-child(1)').when_present.set(username)
-      browser.text_field(css: 'div._ccek6:nth-child(2) > input:nth-child(1)').when_present.set(password)
-      browser.button(css: '._rz1lq').click
+      @browser = Watir::Browser.new :phantomjs
+      @browser.goto "https://www.instagram.com/accounts/login/"
+      @browser.text_field(css: 'div._ccek6:nth-child(1) > input:nth-child(1)').when_present.set(username)
+      @browser.text_field(css: 'div._ccek6:nth-child(2) > input:nth-child(1)').when_present.set(password)
+      @browser.button(css: '._rz1lq').click
       sleep(2)
-      browser
     end
 
     def get_user_basic_json(name)
@@ -42,11 +41,11 @@ class InstagramScraper
     def load_json(url)
       #code
       # JSON.load(open(url))
-      b = login_instagram @username, @password
-      b.goto url
-      html_doc = Nokogiri::HTML(b.html)
+      login_instagram @username, @password
+      @browser.goto url
+      html_doc = Nokogiri::HTML(@browser.html)
       json_string = html_doc.css('pre').first.content
-      b.close
+      @browser.close
       json = JSON.load(json_string)
     end
 end
